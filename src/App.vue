@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <toptitle :title='title' v-show="$route.meta.title"/>
-    <keep-alive>
+    
+    <keep-alive exclude="detail">
       <router-view class="view"/>
     </keep-alive>
     
@@ -11,7 +11,7 @@
 
 <script>
 import tabbar from 'components/tabbar/tabbar'
-import toptitle from 'components/toptitle/toptitle'
+
 export default {
   data() {
     return {
@@ -20,7 +20,7 @@ export default {
   },
   components: {
     tabbar,
-    toptitle
+    
   }
 }
 </script>
@@ -28,7 +28,7 @@ export default {
 <style>
 .view {
   position: absolute;
-  top: 44px;
+  top: 0;
   bottom: 60px;
   left: 0;
   right: 0;

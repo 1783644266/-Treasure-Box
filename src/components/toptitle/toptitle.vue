@@ -1,6 +1,6 @@
 <template>
   <div class="toptitle">
-    <div>{{$route.meta.title}}</div>
+    <div v-if="$route.meta.title">{{$route.meta.title}}</div>
   </div>
 </template>
 
@@ -27,5 +27,6 @@ export default {
   color: white;
   font-size: 20px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  z-index: 99;
 }
 </style>

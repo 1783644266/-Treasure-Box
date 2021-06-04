@@ -33,9 +33,8 @@ export default new Router({
       }
     },
     {
-      path: '/detail',
+      path: '/detail/:iid',
       component: detail,
-      
     },
     {
       path: '/login',
