@@ -23,7 +23,7 @@
         <goodList ref="goodList" :goodData="goodData" />
       </div>
     </div>
-    <detailBottom />
+    <detailBottom @add="add" />
     <totop @click.native="gotop" v-show="isShow" />
   </div>
 </template>
@@ -51,13 +51,14 @@ import { debounce } from "api/utils";
 import Bscroll from "better-scroll";
 import Swiper from "swiper";
 import "swiper/dist/css/swiper.min.css";
+import { Toast } from "mint-ui";
 
 export default {
   name: "detail",
   mixins: [TOTOP],
   created() {
-    let iid = this.$route.params.iid;
-    getGoodDetail(iid).then((data) => {
+    this.iid = this.$route.params.iid;
+    getGoodDetail(this.iid).then((data) => {
       this.imgs = data.itemInfo.topImages;
       this.good = new Goods(
         data.itemInfo,
@@ -91,6 +92,21 @@ export default {
       this.yarr[2] = this.$refs.detailRating.$el.offsetTop;
       this.yarr[3] = this.$refs.goodList.$el.offsetTop;
       console.log(this.yarr);
+    },
+    add() {
+      let prod = {};
+      prod.image = this.good.topImages[0];
+      prod.title = this.good.title;
+      prod.desc = this.good.desc;
+      prod.price = this.good.realPrice;
+      prod.iid = this.iid;
+      this.$store.dispatch("addCardList", prod).then(() => {
+        Toast({
+          message: "已加入购物车",
+          position: "middle",
+          duration: 1000,
+        });
+      });
     },
   },
   data() {
@@ -146,8 +162,8 @@ export default {
       });
     },
     realyIndex(val) {
-      this.$refs.detailTop.currentIndex = val
-    }
+      this.$refs.detailTop.currentIndex = val;
+    },
   },
 
   components: {
@@ -164,6 +180,8 @@ export default {
 </script>
 
 <style scoped>
+
+
 .wrapper {
   position: absolute;
   top: 40px;

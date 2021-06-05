@@ -12,16 +12,18 @@
       <img src="~assets/img/detail/icon03.png" alt="">
       <span>收藏</span>
     </div>
-    <div class="addGood">加入购物车</div>
+    <div @click="add" class="addGood">加入购物车</div>
     <div class="buy">购买</div>
   </div>
 </template>
 
 <script >
 export default {
-  data() {
-    return {};
-  },
+  methods: {
+    add() {
+      this.$emit("add")
+    }
+  }
 };
 </script>
 

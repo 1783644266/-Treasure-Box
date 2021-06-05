@@ -22,7 +22,7 @@ export default new Router({
       path: '/homepage',
       component: homepage,
       meta: {
-        title: '购物街'
+        title: '购物街',
       }
     },
     {

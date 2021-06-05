@@ -4,6 +4,8 @@ import router from './router'
 import store from './store'
 import moment from 'moment'
 
+import 'mint-ui/lib/style.css';
+//不引入没效果
 import 'assets/css/reset.css'
 import 'assets/css/base.css'
 

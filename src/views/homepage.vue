@@ -91,14 +91,14 @@ export default {
       this.i = i;
       this.$refs.classifyControl1.currentInd = i;
       this.$refs.classifyControl2.currentInd = i;
+      // this.scroll.scrollTo(0, -this.y, 0) 开启时 切换选项自动回到顶部
     },
     getHomeGood() {
       let type = this.goodType;
-      let page = this.goods[type].page;
+      let page = ++this.goods[type].page;
       console.log(type, page);
       getHomeGood(type, page).then((data) => {
         let { list } = data;
-        this.goods[type].page++;
         this.goods[type].list.push(...list);
         console.log(list);
       });
@@ -118,6 +118,7 @@ export default {
       i: 0,
       y: 0, //分类选择器距离顶部的距离
       scrollY: 0,
+      aaa: 0 //存储scroll的移动距离，进入主页时主动移动到上次位置
     };
   },
   computed: {
@@ -165,10 +166,12 @@ export default {
     },
   },
   activated() {
+    
+    this.scroll && this.scroll.scrollTo(0, -this.aaa, 1)
     this.load()
   },
   deactivated() {
-    // this.$bus.$off('load')
+    this.aaa = this.scrollY
   },
   components: {
     classifyControl,
