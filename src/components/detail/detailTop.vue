@@ -1,7 +1,7 @@
 <template>
   <div class="detailTop">
     <img @click="$router.back()" src="~assets/img/common/back.svg" alt="">
-    <div @click="currentIndex = index" v-for="(item, index) in title"
+    <div @click="changeIndex(index)" v-for="(item, index) in title"
     :class="{active: index == currentIndex}"
      :key="index">{{item}}</div>
   </div>
@@ -9,8 +9,11 @@
 
 <script >
 export default {
-  props: {
-    
+  methods: {
+    changeIndex(i) {
+      this.currentIndex = i
+      this.$emit("changeIndex", i)
+    }
   },
   data() {
     return {

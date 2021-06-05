@@ -1,6 +1,6 @@
 <template>
   <div class="listLtem" @click="$router.push(`/detail/${good.iid}`)">
-    <img :src="good.show.img" @load="load" alt="">
+    <img :src="good.image?good.image:good.show.img" @load="load" alt="">
     <div class="info">
       <p>{{good.title}}</p>
       <span class="price">{{good.price}}</span>

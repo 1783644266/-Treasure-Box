@@ -21,15 +21,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: fixed;
   right: 10px;
-  bottom: 10px;
+  bottom: 80px;
 }
 .totop i {
   font-size: 25px;
 }
 .move-enter,.move-leave-to {
-  right: -55px;
+  transform: translateX(100%);
   opacity: 0;
 }
 .move-enter-active,.move-leave-active {

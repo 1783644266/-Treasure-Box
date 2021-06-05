@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import moment from 'moment'
 
 import 'assets/css/reset.css'
 import 'assets/css/base.css'
@@ -10,6 +11,13 @@ Vue.config.productionTip = false
 
 Vue.prototype.$bus = new Vue()
 //利用事件总线，监听图片onload,刷新scroll
+
+Vue.prototype.$moment = moment;
+
+Vue.filter('date-format', function (value, formatStr='YYYY-MM-DD') {
+  return moment(value*1000).format(formatStr)
+  // return format(value, formatStr)
+})
 new Vue({
   router,
   store,

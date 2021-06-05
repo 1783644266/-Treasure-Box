@@ -15,7 +15,7 @@ export function request2 (config) {
     baseURL: '/api',
   })
   request1.interceptors.response.use( (data) => {
-    return data && data.data.result
+    return data.data.result? data.data.result : data.data.data.list
   })
   return request1(config)
 }

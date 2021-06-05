@@ -30,7 +30,7 @@
         <goodList :goodData="goodData" />
       </div>
     </div>
-    <totop v-show="scrollY > 1000" @click.native="goTop" />
+    <totop v-show="scrollY > 1000" @click.native="gotop" />
   </div>
 </template>
 
@@ -40,19 +40,21 @@ import recommed from "components/recommed/recommed";
 import popular from "components/popular";
 import goodList from "components/good/goodList";
 import toptitle from "components/toptitle/toptitle";
-import totop from "components/totop";
+
 
 import { getHomeData, getHomeGood } from "api/home";
 import { debounce } from "api/utils";
+import { TOTOP } from "api/mixin";
 
 import Swiper from "swiper";
 import "swiper/dist/css/swiper.min.css";
-import Bscroll from "@better-scroll/core";
-import Pullup from "@better-scroll/pull-up";
+import Bscroll from "better-scroll";
+// import Pullup from "@better-scroll/pull-up";
 
-Bscroll.use(Pullup);
+// Bscroll.use(Pullup);
 
 export default {
+  mixins: [TOTOP],
   created() {
     getHomeData().then((data) => {
       let { banner, recommend } = data;
@@ -79,9 +81,7 @@ export default {
     });
   },
   methods: {
-    goTop() {
-      this.scroll.scrollTo(0, 0, 1000);
-    },
+    
     addGood(type, list) {
       this.goods[type].page++;
       this.goods[type].list.push(...list);
@@ -103,9 +103,7 @@ export default {
         console.log(list);
       });
     }, // 下来加载一页数据
-    load() {
-      this.scroll.refresh();
-    },
+    
   },
   data() {
     return {
@@ -166,14 +164,18 @@ export default {
       });
     },
   },
-  activated() {},
+  activated() {
+    this.load()
+  },
+  deactivated() {
+    // this.$bus.$off('load')
+  },
   components: {
     classifyControl,
     recommed,
     popular,
     goodList,
     toptitle,
-    totop,
   },
 };
 </script>

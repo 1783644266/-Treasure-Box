@@ -30,9 +30,8 @@ export default {
 
 <style scoped>
 .detailInfo {
-  margin-top: 10px;
   width: 100%;
-  padding: 0 5px;
+  padding: 10px 5px 0;
   border-bottom: 5px solid #F2F5F8;
 }
 .pricewrapper {
@@ -61,7 +60,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 13px;
   
 }
 .info-other {
