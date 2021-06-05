@@ -91,7 +91,7 @@ export default {
       this.yarr[1] = this.$refs.detailParams.$el.offsetTop;
       this.yarr[2] = this.$refs.detailRating.$el.offsetTop;
       this.yarr[3] = this.$refs.goodList.$el.offsetTop;
-      console.log(this.yarr);
+      
     },
     add() {
       let prod = {};

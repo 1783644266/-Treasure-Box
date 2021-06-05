@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     
-    <keep-alive exclude="detail">
+    <keep-alive exclude="detail,userLogin">
       <router-view class="view"/>
     </keep-alive>
     
@@ -13,6 +13,12 @@
 import tabbar from 'components/tabbar/tabbar'
 
 export default {
+  created() {
+    let user = JSON.parse(window.localStorage.getItem("userInfo") || "{}")
+    if(user.password) {
+      this.$store.dispatch("saveUser", user)
+    }
+  },
   data() {
     return {
       title: ['主页','分类','购物车','我的'],

@@ -25,17 +25,10 @@ import shopcartList from "./shopcartChildren/shopcartList.vue";
 import { mapGetters } from "vuex";
 
 export default {
-  data() {
-    return {
-      isChecked: false,
-    };
-  },
   methods: {
     allChange() {
       if(!this.totalKind) return
-      this.isChecked = !this.isChecked;
-      let isChecked = this.isChecked;
-      this.$store.dispatch("allChange", isChecked);
+      this.$store.dispatch("allChange", !this.allPitchOn);
     },
   },
   computed: {

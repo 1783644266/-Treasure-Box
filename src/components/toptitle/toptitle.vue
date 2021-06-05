@@ -1,16 +1,13 @@
 <template>
   <div class="toptitle">
     <div v-if="$route.meta.title">{{$route.meta.title}}</div>
+    <slot name="right"></slot>
   </div>
 </template>
 
 <script >
 export default {
-  data() {
-    return {
 
-    }
-  },
 }
 </script>
 
@@ -29,4 +26,5 @@ export default {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   z-index: 99;
 }
+
 </style>

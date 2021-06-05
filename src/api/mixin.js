@@ -1,4 +1,6 @@
 import totop from 'components/totop'
+import toptitle from "components/toptitle/toptitle";
+
 
 export const TOTOP = {
   methods: {
@@ -7,10 +9,10 @@ export const TOTOP = {
     },
     load() {
       this.scroll && this.scroll.refresh();
-      
     },
   },
   components: {
-    totop
+    totop,
+    toptitle
   }
 }

@@ -5,7 +5,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    cardList: []
+    cardList: [],
+    user: {}
   },
   mutations: {
     add(state, shop) {
@@ -26,6 +27,12 @@ export default new Vuex.Store({
     },
     allChangeState(state, isChecked) {
       state.cardList.forEach(e => e.pitchOn = isChecked)
+    },
+    saveUserInfo(state, user) {
+      state.user = user
+    },
+    deleteUserInfo(state) {
+      state.user = {}
     }
   },
   actions: {
@@ -33,12 +40,17 @@ export default new Vuex.Store({
       Vue.set(shop,"count",1)
       Vue.set(shop,"pitchOn",false)
       commit("add",shop)
-    },
+    },//增加商品
     changeGoodState({commit}, iid) {
       commit("cGoodState",iid)
-    },
+    },//更改单类商品选中状态
     allChange({commit}, isChecked) {
       commit("allChangeState" ,isChecked)
+    }, //更改全部商品选中状态(全选/全不选)
+    saveUser({commit}, user) {
+      commit('saveUserInfo', user)
+      let s = JSON.stringify(user)
+      window.localStorage.setItem("userInfo", s)
     }
   },
   getters: {

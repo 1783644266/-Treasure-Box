@@ -1,6 +1,8 @@
 <template>
   <div class="homepage">
-    <toptitle v-show="$route.meta.title" />
+    <toptitle v-show="$route.meta.title" >
+      <div slot="right" v-if="!user.password" class="right" @click="$router.push('/login')">登陆</div>
+    </toptitle>
     <classifyControl
       :class="{ classify: isShow }"
       ref="classifyControl1"
@@ -39,12 +41,13 @@ import classifyControl from "components/classifyControl/classifyControl";
 import recommed from "components/recommed/recommed";
 import popular from "components/popular";
 import goodList from "components/good/goodList";
-import toptitle from "components/toptitle/toptitle";
+// import toptitle from "components/toptitle/toptitle";
 
 
 import { getHomeData, getHomeGood } from "api/home";
 import { debounce } from "api/utils";
 import { TOTOP } from "api/mixin";
+import {mapState} from "vuex"
 
 import Swiper from "swiper";
 import "swiper/dist/css/swiper.min.css";
@@ -73,6 +76,7 @@ export default {
       let { list } = data;
       this.addGood("sell", list);
     });
+    
   },
   mounted() {
     this.s = debounce(this.load);
@@ -131,6 +135,7 @@ export default {
     isShow() {
       return this.scrollY >= this.y;
     },
+    ...mapState(['user'])
   },
   watch: {
     banner() {
@@ -178,7 +183,7 @@ export default {
     recommed,
     popular,
     goodList,
-    toptitle,
+    
   },
 };
 </script>
@@ -210,5 +215,12 @@ img {
   display: block;
   width: 100%;
   height: 100%;
+}
+.right {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  font-size: 18px;
+  transform: translateY(-50%);
 }
 </style>
